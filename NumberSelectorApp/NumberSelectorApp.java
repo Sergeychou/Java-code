@@ -1,6 +1,6 @@
 /**
  *@author chikaiiii
- *@version 1.0
+ *@version 1.2
  *@since 26/4/2019
  */
 
@@ -22,7 +22,7 @@ import java.awt.event.ActionEvent;
 
 
 public class NumberSelectorApp extends JFrame{
-	boolean isStop=false;
+	boolean isStart=false;
 	Thread thread;
 	private JPanel panel1=new JPanel();
 	private JPanel panel2=new JPanel();
@@ -73,7 +73,7 @@ public class NumberSelectorApp extends JFrame{
 			@SuppressWarnings("static-access")
 			public void run() {
 				int ans;
-				while(!(isStop)) {
+				while(isStart) {
 					try {
 						ans=random.nextInt(300)+1;
 						label.setText(""+ans);
@@ -95,7 +95,7 @@ public class NumberSelectorApp extends JFrame{
 		startbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					isStop=false;
+					isStart=true;
 					runtest();
 				}catch(Exception e2)
 				{
@@ -105,15 +105,15 @@ public class NumberSelectorApp extends JFrame{
 		});
 		stopbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				isStop=true;
+				if(isStart) {isStart=false;
 				
-				label.setForeground(Color.GREEN);
+				label.setForeground(Color.GREEN);}
 			}
 		});
 		resetbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				isStop=true;
+				isStart=true;
 				label.setForeground(Color.BLACK);
 				label.setText("--");
 				
