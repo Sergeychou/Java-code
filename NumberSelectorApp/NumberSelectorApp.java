@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -27,9 +26,12 @@ public class NumberSelectorApp extends JFrame{
 	Thread thread;
 	private JPanel panel1=new JPanel();
 	private JPanel panel2=new JPanel();
+	private JPanel panel3=new JPanel();
 	private JButton startbutton=new JButton("START");
 	private JButton stopbutton=new JButton("STOP");
+	private JButton resetbutton=new JButton("RESET");
 	private JLabel label=new JLabel();
+	private JLabel label1=new JLabel("<抽奖程序>");
 	Random random=new Random();
 	
 	public NumberSelectorApp() 
@@ -50,9 +52,16 @@ public class NumberSelectorApp extends JFrame{
 	}
 	
 	public void addCompontents() {
-		panel1.add(label);
+		label.setText("--");
+		label.setFont(new Font("Times New Roman",1,72));
+		label.setForeground(Color.BLACK);
+		panel1.add(label,JLabel.CENTER);
+		panel1.setBackground(Color.WHITE);
 		panel2.add(startbutton);
 		panel2.add(stopbutton);
+		panel2.add(resetbutton);
+		panel3.add(label1);
+		getContentPane().add(panel3,BorderLayout.NORTH);
 		getContentPane().add(panel1,BorderLayout.CENTER);
 		getContentPane().add(panel2,BorderLayout.SOUTH);
 	}
@@ -66,13 +75,13 @@ public class NumberSelectorApp extends JFrame{
 				int ans;
 				while(!(isStop)) {
 					try {
-						ans=random.nextInt(300);
+						ans=random.nextInt(300)+1;
 						label.setText(""+ans);
-						label.setFont(new Font("Times New Roman",1,36));
-						label.setForeground(Color.black);
+						label.setFont(new Font("Times New Roman",1,72));
+						label.setForeground(Color.BLACK);
 						thread.sleep(100);
 					}catch(Exception e) {
-						JOptionPane.showMessageDialog(null, "FAILED");
+						JOptionPane.showMessageDialog(null, "FAILED>_<!!!");
 					}
 
 			}
@@ -99,6 +108,15 @@ public class NumberSelectorApp extends JFrame{
 				isStop=true;
 				
 				label.setForeground(Color.GREEN);
+			}
+		});
+		resetbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				isStop=true;
+				label.setForeground(Color.BLACK);
+				label.setText("--");
+				
 			}
 		});
 	}
