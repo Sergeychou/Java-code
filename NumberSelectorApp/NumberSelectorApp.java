@@ -113,7 +113,7 @@ public class NumberSelectorApp extends JFrame{
 		resetbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				isStart=true;
+				isStart=false;
 				label.setForeground(Color.BLACK);
 				label.setText("--");
 				
